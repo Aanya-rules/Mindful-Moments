@@ -29,56 +29,23 @@ struct QuestionsPage: View {
                     .font(.system(size: 20))
                     .fontWeight(.medium)
                     .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
-                HStack{
-                    Button {
-                        
-                    } label: {
-                        Text("Yes")
-                            .font(.callout)
-                            .fontWeight(.bold)
-                            
-                    }
-                    .padding(.leading, 100.0)
-                    
-                    Spacer()
-                    Button {
-                        
-                    } label: {
-                        Text("No")
-                            .font(.callout)
-                            .fontWeight(.bold)
-                    }
-                    .padding(.trailing, 100.0)
-                    
-                }
+                TextField("Type answer here...", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                    .border(Color.accent, width: 2)
+                    .padding(.horizontal, 50.0)
+                 
                 Spacer()
+                
                 Text("Have you eaten today?")
                     .font(.system(size: 20))
                     .fontWeight(.medium)
                     .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                 
-                HStack{
-                    Button {
-                        
-                    } label: {
-                        Text("Yes")
-                            .font(.callout)
-                            .fontWeight(.bold)
-                    }
-                    .padding(.leading, 100.0)
-                    
-                    Spacer()
-                    Button {
-                        
-                    } label: {
-                        Text("No")
-                            .font(.callout)
-                            .fontWeight(.bold)
-                    }
-                    .padding(.trailing, 100.0)
-                    
-                }
+                TextField("Type answer here...", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                    .border(Color.accent, width: 2)
+                    .padding(.horizontal, 50.0)
+               
                 Spacer()
+               
                 Text("How was your mood this morning?")
                     .font(.system(size: 20))
                     .fontWeight(.medium)
