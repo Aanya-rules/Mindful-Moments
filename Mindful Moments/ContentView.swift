@@ -28,9 +28,12 @@ struct ContentView: View {
                 TextField("Type your name here...", text: $name)
                     .padding()
                     .border(Color.gray, width: 4)
+                    .frame(width: /*@START_MENU_TOKEN@*/350.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/70.0/*@END_MENU_TOKEN@*/)
                 TextField("Type your password here...", text: $password)
                     .padding()
                     .border(Color.gray, width: 4)
+                    .frame(width: /*@START_MENU_TOKEN@*/350.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/70.0/*@END_MENU_TOKEN@*/)
+                
             
                 
                 NavigationLink(destination: QuestionsPage()) {
@@ -40,6 +43,7 @@ struct ContentView: View {
                     
                     
                 }
+
                 .border(Color.gray, width: 4)
                 .cornerRadius(5)
                 
