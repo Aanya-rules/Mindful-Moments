@@ -1,7 +1,30 @@
 {
   "colors" : [
     {
+      "color" : {
+        "color-space" : "display-p3",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0.500",
+          "green" : "0.422",
+          "red" : "0.099"
+        }
+      },
       "idiom" : "universal"
+    },
+    {
+      "color" : {
+        "color-space" : "display-p3",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0.447",
+          "green" : "0.502",
+          "red" : "0.251"
+        }
+      },
+      "filename" : "background 4.png",
+      "idiom" : "universal",
+      "unassigned" : true
     }
   ],
   "info" : {
