@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUI
 import WebKit
 
 struct WebGIFView: UIViewRepresentable {
