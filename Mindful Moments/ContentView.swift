@@ -40,11 +40,13 @@ struct ContentView: View {
                     .border(Color.gray, width: 4)
                     .frame(width: 350.0, height: 70.0)
                 
+                    .tint(.white)
+                
             
                 
                 NavigationLink(destination: QuestionsPage()) {
                     Text("Login")
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                         .bold()
                     
                     
@@ -53,12 +55,18 @@ struct ContentView: View {
                 .border(Color(hue: 0.282, saturation: 0.822, brightness: 0.486), width: 4)
                 .cornerRadius(5)
                 
+                .padding()
+                Text("Forgot password?")
+                    .font(.subheadline)
+                    .foregroundColor(.green)
+                
                 
             }
             .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             .font(.title2)
             .buttonStyle(.borderedProminent)
             .tint(.green)
+            .shadow(radius: 3)
         }
         //.padding()
         
