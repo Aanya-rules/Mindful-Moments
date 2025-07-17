@@ -7,6 +7,9 @@
 
 import SwiftUI
 import SwiftData
+import WebKit
+
+ 
 
 struct QuestionsPage: View {
     @State private var newWater = ""
@@ -175,6 +178,10 @@ struct QuestionsPage: View {
                         Text("Average: \(Average)")
                             .font(.title)
                     }
+                  Spacer()
+                    
+                    WebGIFView(gifName: "beardance")
+                        .frame(width: 200, height: 200)
                    
                 }
                 .padding()
