@@ -17,13 +17,15 @@ struct ClosingPage: View {
                 
                 Text("Be kind to yourself!")
                     .font(.largeTitle)
-                    .foregroundColor(Color(hue: 0.33, saturation: 0.669, brightness: 0.598))
+                    .foregroundColor(Color(hue: 0.299, saturation: 0.639, brightness: 0.422))
                     .bold()
+                    .padding()
                 
                 Text("Remember to:")
-                    .font(.title2)
+                    .font(.title)
                     .fontWeight(.black)
-                    .foregroundColor(Color(hue: 0.471, saturation: 0.721, brightness: 0.503))
+                    .foregroundColor(Color.orange)
+                    .padding()
                 
                 Text("1. Practice deep breathing.")
                     .fontWeight(.heavy)
