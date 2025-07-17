@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct DailyAverage: View {
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Image("background")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                Text("Daily Average Mood")
+                    .font(.system(size: 32, weight: .bold, design: .default))
+                    .foregroundColor(Color(red: 0.59, green: 0.665, blue: 0.489))
+             
+            }
+        }
+        
     }
 }
 

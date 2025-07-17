@@ -17,7 +17,7 @@ struct QuestionsPage: View {
  
     var body: some View {
         
-        //friends array
+       
       
         NavigationStack {
             
@@ -41,8 +41,10 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     TextField("Type answer here...", text: $newWater)
-                        .border(Color.accent, width: 2)
-                        .padding(.horizontal, 50.0)
+                        .padding()
+                        .border(Color.accentColor, width: 2)
+                        .frame(width: 290.0, height: 40.0)
+
                     
                     Spacer()
                     
@@ -52,8 +54,10 @@ struct QuestionsPage: View {
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     
                     TextField("Type answer here...", text: $newFood)
-                        .border(Color.accent, width: 2)
-                        .padding(.horizontal, 50.0)
+                        .padding()
+                        .border(Color.accentColor, width: 2)
+                        .frame(width: 290.0, height: 40.0)
+
                     
                     Spacer()
                     
@@ -61,34 +65,49 @@ struct QuestionsPage: View {
                         .font(.system(size: 20))
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
+                  
                     Text("Type in 1-5, 1 being horrible and 5 being amazing")
                         .font(.system(size: 20))
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                   
                     TextField("Type here...", text: $newMorning)
-                        .border(Color.accent, width: 2)
-                        .padding(.horizontal, 50.0)
+                        .padding()
+                        .border(Color.accentColor, width: 2)
+                        .frame(width: 290.0, height: 40.0)
+
                     
                     Spacer()
                     Text("How was your mood this afternoon?")
                         .font(.system(size: 20))
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
+                    Text("Type in 1-5, 1 being horrible and 5 being amazing")
+                        .font(.system(size: 20))
+                        .fontWeight(.medium)
+                        .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     
                     TextField("Type here...", text: $newAfternoon)
-                        .border(Color.accent, width: 2)
-                        .padding(.horizontal, 50.0)
-                    
+                        .padding()
+                        .border(Color.accentColor, width: 2)
+                        .frame(width: 290.0, height: 40.0)
                     Spacer()
+                    
                     Text("How is your mood right now?")
                         .font(.system(size: 20))
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                    
+                    Text("Type in 1-5, 1 being horrible and 5 being amazing")
+                        .font(.system(size: 20))
+                        .fontWeight(.medium)
+                        .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
+                   
                     TextField("Type here...", text: $newNow)
-                        .border(Color.accent, width: 2)
-                        .padding(.horizontal, 50.0)
+                        .padding()
+                        .border(Color.accentColor, width: 2)
+                        .frame(width: 290.0, height: 40.0)
+                       
                     
                     Spacer()
                     Button("Save") {
@@ -104,7 +123,7 @@ struct QuestionsPage: View {
                     .cornerRadius(5)
                     .buttonStyle(.borderedProminent)
                     
-                    NavigationLink(destination: WeeklyandDestinations()) {
+                    NavigationLink(destination: DailyAverage()) {
                         Text("Next")
                         
                             .foregroundColor(.white)
@@ -119,10 +138,65 @@ struct QuestionsPage: View {
                     .buttonStyle(.borderedProminent)
                 }
             }
+            .shadow(radius: 1)
+        }
+       
+            
+        
+
+    }
+    struct DailyAverage: View {
+        let newMorning = ""
+        let newAfternoon = ""
+        let newNow = ""
+        
+        @State private var average: Double?
+        
+        var body: some View {
+            ZStack {
+                Image("background 2")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Text("Daily Average Mood")
+                        .font(.system(size: 32, weight: .bold, design: .default))
+                        .foregroundColor(Color(red: 0.395, green: 0.481, blue: 0.307))
+                    Spacer()
+                    Button("Calculate Average") {
+                        calculateAverage()
+                    }
+                    .padding()
+                    .background(Color.accent)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    
+                    if let Average = average {
+                        Text("Average: \(Average)")
+                            .font(.title)
+                    }
+                   
+                }
+                .padding()
+            }
+           
+            }
+        func calculateAverage() {
+            
+            if let num1 = Int(newMorning),
+               let num2 = Int(newAfternoon),
+               let num3 = Int(newNow) {
+                
+                average = Double(num1 + num2 + num3) / 3.0
+            } else {
+                average = nil  // Invalid input
+            }
         }
     }
+        
 }
-#Preview {
+
+    #Preview {
     QuestionsPage()
         .modelContainer(for: Answers.self, inMemory: true)
 }
