@@ -30,15 +30,15 @@ struct ContentView: View {
                         .foregroundColor(Color(hue: 0.324, saturation: 0.531, brightness: 0.558))
                         .bold()
                 }
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .padding(.all)
                 TextField("Type your name here...", text: $name)
                     .padding()
                     .border(Color.gray, width: 4)
-                    .frame(width: /*@START_MENU_TOKEN@*/350.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/70.0/*@END_MENU_TOKEN@*/)
+                    .frame(width: 350.0, height: 70.0)
                 TextField("Type your password here...", text: $password)
                     .padding()
                     .border(Color.gray, width: 4)
-                    .frame(width: /*@START_MENU_TOKEN@*/350.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/70.0/*@END_MENU_TOKEN@*/)
+                    .frame(width: 350.0, height: 70.0)
                 
             
                 
@@ -62,10 +62,10 @@ struct ContentView: View {
         }
         //.padding()
         
+       }
     }
 }
+#Preview {
+    ContentView()
 }
-        #Preview {
-            ContentView()
-        }
 
