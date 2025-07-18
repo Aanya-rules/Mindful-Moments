@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WebKit
 
 struct ClosingPage: View {
     var body: some View {
@@ -51,11 +52,17 @@ struct ClosingPage: View {
                 Text("So, let someone know you care about them too.")
                     .fontWeight(.regular)
                     .padding()
+                }
+                    WebGIFView(gifName: "beardoctor")
+                        .frame(width: 200, height: 200)
+                    
+                    
+                }
             }
         }
+    
+    
+    #Preview {
+        ClosingPage()
     }
-}
 
-#Preview {
-    ClosingPage()
-}
