@@ -18,6 +18,7 @@ struct ProxyView: View {
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .foregroundColor(Color.green)
+                    .padding()
                 HStack {
                     Text("🙂")
                         .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
@@ -28,15 +29,32 @@ struct ProxyView: View {
                     Text("😱")
                         .font(.largeTitle)
                 }
-                NavigationLink(destination: ClosingPage()) {
-                    Text("Proceed")
+                .padding()
+                HStack {
+                    Text("Mild")
+                        .font(/*@START_MENU_TOKEN@*/.headline/*@END_MENU_TOKEN@*/)
+                    Text("Moderate")
                         .font(.headline)
+                    Text("Severe")
+                        .font(.headline)
+                    Text("Panic")
+                        .font(.headline)
+                }
+                .padding()
+                Text("Mild Anxiety")
+                    .font(.callout)
+                    .fontWeight(.heavy)
+                    .padding()
+                NavigationLink(destination: ClosingPage()) {
+                    Text("Take Action")
+                        .font(.title3)
                         .foregroundColor(.green)
                         .bold()
 
                 }
-                .tint(.white)
+                
             }
+            .tint(.white)
         }
     }
 }

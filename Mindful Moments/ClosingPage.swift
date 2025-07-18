@@ -53,13 +53,6 @@ struct ClosingPage: View {
                     .fontWeight(.regular)
                     .padding()
                 
-                Text("this is supposed to be at the end")
-                
-                NavigationLink(destination: ClosingPage()) {
-                    Text("Login")
-                        .foregroundColor(.white)
-                        .bold()
-                }
                 
                 WebGIFView(gifName: "beardoctor")
                     .frame(width: 200, height: 200)
