@@ -98,7 +98,7 @@ struct ContentView: View {
                 Text("Mindful Moments")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .foregroundColor(Color(hue: 0.504, saturation: 0.82, brightness: 0.604))
+                    .foregroundColor(Color.pink)
                     
                     
                 withAnimation {
