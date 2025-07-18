@@ -162,10 +162,7 @@ struct QuestionsPage: View {
                         Text("Next")
                         
                             .foregroundColor(.white)
-                            .bold()
-                        
-                        
-                        
+                            .bold() 
                         
                     }
                     

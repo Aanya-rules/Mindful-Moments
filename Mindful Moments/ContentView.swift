@@ -88,17 +88,16 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                Image("background")
+        ZStack {
+             Image("background")
                     .resizable(resizingMode: .stretch)
                     .aspectRatio(contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
-                
-                VStack {
-                    Text("Mindful Moments")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .foregroundColor(Color(hue: 0.504, saturation: 0.82, brightness: 0.604))
+            VStack {
+               Text("Mindful Moments")
+                     .font(.largeTitle)
+                     .fontWeight(.heavy)
+                     .foregroundColor(Color(hue: 0.504, saturation: 0.82, brightness: 0.604))
                     
                     withAnimation {
                         Text(textTitle)
@@ -107,29 +106,39 @@ struct ContentView: View {
                             .bold()
                     }
                     .padding(.all)
-                    
-                    TextField("Type your name here...", text: $name)
-                        .padding()
-                        .border(Color.gray, width: 4)
-                        .frame(width: 350.0, height: 70.0)
-                    
-                    TextField("Type your password here...", text: $password)
-                        .padding()
-                        .border(Color.gray, width: 4)
-                        .frame(width: 350.0, height: 70.0)
-                        .tint(.white)
-                    
-                    // Login button
-                    NavigationLink(destination: ClosingPage()) {
-                        Text("Login")
-                            .foregroundColor(.white)
-                            .bold()
-                            .frame(width: 200, height: 50) // consistent sizing
+                                
+                TextField("Type your name here...", text: $name)
+                    .padding()
+                    .border(Color.gray, width: 4)
+                    .frame(width: 350.0, height: 70.0)
+                TextField("Type your password here...", text: $password)
+                    .padding()
+                    .border(Color.gray, width: 4)
+                    .frame(width: 350.0, height: 70.0)             
+                    .tint(.white)
+                
+            
+                
+                NavigationLink(destination: QuestionsPage()) {
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .bold()
+                }
+
+                .border(Color(hue: 0.282, saturation: 0.822, brightness: 0.486), width: 4)
+                .cornerRadius(5)
+                
+                .padding()
+                Text("Forgot password?")
+                    .font(.subheadline)
+                    .foregroundColor(.green)
+                
+                HStack {
+                    Button("Pause") {
+                        AudioManager.shared.pauseMusic()
                     }
-                    .background(Color(hue: 0.282, saturation: 0.822, brightness: 0.486))
-                    .cornerRadius(10)
-                    .padding(.top, 10)
-                    
+                    Button("Play") {
+                        AudioManager.shared.resumeMusic()
                     // About Us button
                     NavigationLink(destination: AboutUsPage()) {
                         Text("About Us")
@@ -140,18 +149,6 @@ struct ContentView: View {
                     .background(Color(hue: 0.282, saturation: 0.822, brightness: 0.486))
                     .cornerRadius(10)
                     .padding(.bottom, 10)
-                    
-                    Text("Forgot password?")
-                        .font(.subheadline)
-                        .foregroundColor(.green)
-                    
-                    HStack {
-                        Button("Pause") {
-                            AudioManager.shared.pauseMusic()
-                        }
-                        Button("Resume") {
-                            AudioManager.shared.resumeMusic()
-                        }
                     }
                     
                     WebGIFView(gifName: "bearsleep")

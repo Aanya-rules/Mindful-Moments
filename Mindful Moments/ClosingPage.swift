@@ -52,10 +52,14 @@ struct ClosingPage: View {
                 Text("So, let someone know you care about them too.")
                     .fontWeight(.regular)
                     .padding()
+                
+                
+                WebGIFView(gifName: "beardoctor")
+                    .frame(width: 200, height: 200)
+                
                 }
-                    WebGIFView(gifName: "beardoctor")
-                        .frame(width: 200, height: 200)
-                    
+            
+                  
                     
                 }
             }
