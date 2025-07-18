@@ -16,7 +16,7 @@ struct QuestionsPage: View {
     @State private var newFood = ""
     @State private var newMorning = ""
     @State private var newAfternoon = ""
-    @State private var newNow = ""
+    @State private var newCurrentMood = ""
     
     @StateObject private var viewModel = AnswersViewModel()
     @State private var showConfirmation = false
@@ -45,7 +45,7 @@ struct QuestionsPage: View {
                         .font(.system(size: 20))
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
-                    TextField("Type answer here...", text: $viewModel.water)
+                    TextField("Type answer here...", text: $newWater)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -58,7 +58,7 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     
-                    TextField("Type answer here...", text: $viewModel.food)
+                    TextField("Type answer here...", text: $newFood)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -76,7 +76,7 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     
-                    TextField("Type here...", text: $viewModel.morning)
+                    TextField("Type here...", text: $newMorning)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -92,7 +92,7 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                 
-                    TextField("Type here...", text: $viewModel.afternoon)
+                    TextField("Type here...", text: $newAfternoon)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -108,7 +108,7 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     
-                    TextField("Type here...", text: $viewModel.now )
+                    TextField("Type here...", text: $newCurrentMood)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -119,13 +119,27 @@ struct QuestionsPage: View {
 
                   
                     Button("Save") {
+                
+                        viewModel.water = newWater
+                        viewModel.food = newFood
+                        viewModel.morning = newMorning
+                        viewModel.afternoon = newAfternoon
+                        viewModel.currentMood = newCurrentMood
+                        
+                        
                         _ = Answers(Water: viewModel.water,
                                     Food: viewModel.food,
                                     Morning: viewModel.morning,
                                     Afternoon: viewModel.afternoon,
-                                    Now: viewModel.now)
-                        
-                        viewModel.reset()
+                                    currentMood: viewModel.currentMood)
+
+                        // Clear only the UI fields
+                        newWater = ""
+                        newFood = ""
+                        newMorning = ""
+                        newAfternoon = ""
+                        newCurrentMood = ""
+
                         showConfirmation = true
                     }
                     .tint(Color.green)
@@ -155,6 +169,15 @@ struct QuestionsPage: View {
                     .border(Color.gray, width: 2)
                     .cornerRadius(5)
                     .buttonStyle(.borderedProminent)
+                    
+                    HStack {
+                        Button("Pause") {
+                            AudioManager.shared.pauseMusic()
+                        }
+                        Button("Resume") {
+                            AudioManager.shared.resumeMusic()
+                        }
+                    }
                 }
             }
             .shadow(radius: 1)
@@ -171,61 +194,110 @@ struct QuestionsPage: View {
         @State private var errorMessage: String?
         
         var body: some View {
-            ZStack {
-                Image("background 2")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.all)
+            
+            NavigationStack {
                 
-                VStack {
-                    Text("Daily Average Mood")
-                        .font(.system(size: 32, weight: .bold, design: .default))
-                        .foregroundColor(Color(red: 0.395, green: 0.481, blue: 0.307))
-                    Spacer()
-                    
-                    Button("Calculate Average") {
-                        calculateAverage()
-                    }
-                    .padding()
-                    .background(Color.accent)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                ZStack {
+                    Image("background")
+                        .resizable()
+                        .edgesIgnoringSafeArea(.all)
                     
                     
-                    if let avg = average {
-                        Text("Average: \(avg,specifier: "%.1f")")
-                            .font(.title)
+                    VStack {
+                        Text("Daily Average Mood")
+                            .font(.system(size: 32, weight: .bold, design: .default))
+                            .foregroundColor(Color(red: 0.59, green: 0.665, blue: 0.489))
+                        Spacer()
                         
-                    }
-                    else if let error = errorMessage{
-                        Text(error)
+                        Button("Calculate Average") {
+                            calculateAverage()
+                        }
+                        .padding()
+                        .background(Color.accent)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                         
+                        
+                        if let avg = average {
+                            Text("Average: \(avg,specifier: "%.1f")")
+                                .font(.title)
+                            
+                        }
+                        else if let error = errorMessage{
+                            Text(error)
+                            
+                        }
+                        Spacer()
+                       
+                        WebGIFView(gifName: "beardance")
+                            .frame(width: 200, height: 200)
+                        Spacer()
+                        
+                        HStack{
+                            NavigationLink(destination: WeeklyandDestinations()) {
+                                Text("Destinations")
+                                
+                                    .foregroundColor(.white)
+                                    .bold()
+                                
+                                
+                                
+                                
+                            }
+                            
+                            .border(Color.gray, width: 2)
+                            .cornerRadius(5)
+                            .buttonStyle(.borderedProminent)
+                            
+                            
+                           
+                            NavigationLink(destination: ClosingPage()) {
+                                Text("affirmations")
+                                
+                                    .foregroundColor(.white)
+                                    .bold()
+                                
+                                
+                                
+                                
+                            }
+                            
+                            .border(Color.gray, width: 2)
+                            .cornerRadius(5)
+                            .buttonStyle(.borderedProminent)
+                            
+                        }
                     }
-                    Spacer()
-                    
+                    .padding(.top, 200.0)
                     
                 }
-                .padding(.top, 200.0)
+           
+                
             }
-            
         }
+
+        
+        
         func calculateAverage() {
             average = nil
             if let num1 = Int(viewModel.morning),
                let num2 = Int(viewModel.afternoon),
-               let num3 = Int(viewModel.now),
+               let num3 = Int(viewModel.currentMood),
                (1...5).contains(num1),
                (1...5).contains(num2),
                (1...5).contains(num3) {
-                  
-                average = Double(num1 + num2 + num3) / 3.0
-                    errorMessage = nil
-                } else {
-                    average = nil
-                    errorMessage = "Please enter valid numbers between 1 and 5."
-                }
                 
+                average = Double(num1 + num2 + num3) / 3.0
+                errorMessage = nil
+            } else {
+                average = nil
+                errorMessage = "Please enter valid numbers between 1 and 5."
             }
+            
         }
+
+    }
+        
         
     }
     #Preview {
