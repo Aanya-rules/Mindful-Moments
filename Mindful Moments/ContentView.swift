@@ -1,13 +1,13 @@
 //
 //  ContentView.swift
 //  InteractiveUI
-//
+// If all else fails, Cmd + option + return
 //  Created by Scholar on 7/9/25.
 //
 
 import SwiftUI
 import WebKit
-
+//Gifs!
 struct WebGIFView: UIViewRepresentable {
     let gifName: String
 
@@ -29,7 +29,61 @@ struct WebGIFView: UIViewRepresentable {
 
     func updateUIView(_ uiView: WKWebView, context: Context) {}
 }
+//Audio
+import AVFoundation
 
+class AudioManager {
+    static let shared = AudioManager()
+    private var audioPlayer: AVAudioPlayer?
+
+    private init() {
+        setupAudioSession()
+        startBackgroundMusic()
+    }
+
+    private func setupAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Audio session setup failed: \(error)")
+        }
+    }
+
+    private func startBackgroundMusic() {
+        guard let url = Bundle.main.url(forResource: "coffee_house", withExtension: "mp3") else {
+            print("MP3 file not found.")
+            return
+        }
+
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.numberOfLoops = -1 // Loop indefinitely
+            audioPlayer?.volume = 1.0
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+        } catch {
+            print("Failed to initialize audio player: \(error)")
+        }
+    }
+
+
+    func stopMusic() {
+        audioPlayer?.stop()
+    }
+
+    func pauseMusic() {
+        audioPlayer?.pause()
+    }
+
+    func resumeMusic() {
+        audioPlayer?.play()
+        
+        
+    }
+}
+
+//Code
 struct ContentView: View {
     @State private var name = ""
     @State private var password = ""
@@ -86,9 +140,20 @@ struct ContentView: View {
                     .font(.subheadline)
                     .foregroundColor(.green)
                 
+                HStack {
+                    Button("Pause") {
+                        AudioManager.shared.pauseMusic()
+                    }
+                    Button("Resume") {
+                        AudioManager.shared.resumeMusic()
+                    }
+                }
+
+                
 
                 WebGIFView(gifName: "bearsleep")
                     .frame(width: 200, height: 200)
+                
 
 
                 

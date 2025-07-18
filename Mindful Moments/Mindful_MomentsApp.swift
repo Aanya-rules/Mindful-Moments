@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct Mindful_MomentsApp: App {
+    init() {
+        _ = AudioManager.shared // 🔊 Start background music
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
