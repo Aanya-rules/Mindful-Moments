@@ -1,13 +1,13 @@
 //
 //  ContentView.swift
 //  InteractiveUI
-// If all else fails, Cmd + option + return
 //  Created by Scholar on 7/9/25.
 //
 
 import SwiftUI
 import WebKit
-//Gifs!
+
+// Gifs!
 struct WebGIFView: UIViewRepresentable {
     let gifName: String
 
@@ -26,10 +26,10 @@ struct WebGIFView: UIViewRepresentable {
         return webView
     }
 
-
     func updateUIView(_ uiView: WKWebView, context: Context) {}
 }
-//Audio
+
+// Audio
 import AVFoundation
 
 class AudioManager {
@@ -67,7 +67,6 @@ class AudioManager {
         }
     }
 
-
     func stopMusic() {
         audioPlayer?.stop()
     }
@@ -78,99 +77,98 @@ class AudioManager {
 
     func resumeMusic() {
         audioPlayer?.play()
-        
-        
     }
 }
 
-//Code
+// Code
 struct ContentView: View {
     @State private var name = ""
     @State private var password = ""
     @State private var textTitle = "Welcome"
+    
     var body: some View {
         NavigationStack {
-        ZStack {
-            Image("background")
-                .resizable(resizingMode: .stretch)
-                .aspectRatio(contentMode: .fill).edgesIgnoringSafeArea(.all)
-            VStack {
-                Text("Mindful Moments")
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .foregroundColor(Color(hue: 0.504, saturation: 0.82, brightness: 0.604))
-                    
-                    
-                withAnimation {
-                    Text(textTitle)
+            ZStack {
+                Image("background")
+                    .resizable(resizingMode: .stretch)
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Text("Mindful Moments")
                         .font(.largeTitle)
-                        .foregroundColor(Color(hue: 0.324, saturation: 0.531, brightness: 0.558))
-                        .bold()
-                }
-                .padding(.all)
-                
-              
-                
-                TextField("Type your name here...", text: $name)
-                    .padding()
-                    .border(Color.gray, width: 4)
-                    .frame(width: 350.0, height: 70.0)
-                TextField("Type your password here...", text: $password)
-                    .padding()
-                    .border(Color.gray, width: 4)
-                    .frame(width: 350.0, height: 70.0)
-                
-                    .tint(.white)
-                
-            
-                
-                NavigationLink(destination: ClosingPage()) {
-                    Text("Login")
-                        .foregroundColor(.white)
-                        .bold()
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color(hue: 0.504, saturation: 0.82, brightness: 0.604))
                     
+                    withAnimation {
+                        Text(textTitle)
+                            .font(.largeTitle)
+                            .foregroundColor(Color(hue: 0.324, saturation: 0.531, brightness: 0.558))
+                            .bold()
+                    }
+                    .padding(.all)
                     
+                    TextField("Type your name here...", text: $name)
+                        .padding()
+                        .border(Color.gray, width: 4)
+                        .frame(width: 350.0, height: 70.0)
+                    
+                    TextField("Type your password here...", text: $password)
+                        .padding()
+                        .border(Color.gray, width: 4)
+                        .frame(width: 350.0, height: 70.0)
+                        .tint(.white)
+                    
+                    // Login button
+                    NavigationLink(destination: ClosingPage()) {
+                        Text("Login")
+                            .foregroundColor(.white)
+                            .bold()
+                            .frame(width: 200, height: 50) // consistent sizing
+                    }
+                    .background(Color(hue: 0.282, saturation: 0.822, brightness: 0.486))
+                    .cornerRadius(10)
+                    .padding(.top, 10)
+                    
+                    // About Us button
+                    NavigationLink(destination: AboutUsPage()) {
+                        Text("About Us")
+                            .foregroundColor(.white)
+                            .bold()
+                            .frame(width: 200, height: 50) // consistent sizing
+                    }
+                    .background(Color(hue: 0.282, saturation: 0.822, brightness: 0.486))
+                    .cornerRadius(10)
+                    .padding(.bottom, 10)
+                    
+                    Text("Forgot password?")
+                        .font(.subheadline)
+                        .foregroundColor(.green)
+                    
+                    HStack {
+                        Button("Pause") {
+                            AudioManager.shared.pauseMusic()
+                        }
+                        Button("Resume") {
+                            AudioManager.shared.resumeMusic()
+                        }
+                    }
+                    
+                    WebGIFView(gifName: "bearsleep")
+                        .frame(width: 200, height: 200)
                 }
-
-                .border(Color(hue: 0.282, saturation: 0.822, brightness: 0.486), width: 4)
-                .cornerRadius(5)
-                
                 .padding()
-                Text("Forgot password?")
-                    .font(.subheadline)
-                    .foregroundColor(.green)
-                
-                HStack {
-                    Button("Pause") {
-                        AudioManager.shared.pauseMusic()
-                    }
-                    Button("Resume") {
-                        AudioManager.shared.resumeMusic()
-                    }
-                }
-
-                
-
-                WebGIFView(gifName: "bearsleep")
-                    .frame(width: 200, height: 200)
-                
-
-
-                
-                
+                .font(.title2)
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+                .shadow(radius: 3)
             }
-            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            .font(.title2)
-            .buttonStyle(.borderedProminent)
-            .tint(.green)
-            .shadow(radius: 3)
         }
-        //.padding()
-        
-       }
     }
 }
+
 #Preview {
     ContentView()
 }
+
 
