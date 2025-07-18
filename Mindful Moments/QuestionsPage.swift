@@ -274,6 +274,7 @@ struct QuestionsPage: View {
            
                 
             }
+            .shadow(radius: 1)
         }
 
         
