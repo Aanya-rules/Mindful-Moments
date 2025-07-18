@@ -14,14 +14,14 @@ class Answers {
     var Food: String
     var Morning: String
     var Afternoon: String
-    var Now: String
+    var currentMood: String
     
-    init(Water: String, Food: String, Morning: String, Afternoon: String,  Now: String) {
+    init(Water: String, Food: String, Morning: String, Afternoon: String,  currentMood: String) {
         self.Water = Water
         self.Food = Food
         self.Morning = Morning
         self.Afternoon = Afternoon
-        self.Now = Now
+        self.currentMood = currentMood
     }
 }
 
@@ -30,13 +30,6 @@ class AnswersViewModel: ObservableObject {
     @Published var food = ""
     @Published var morning = ""
     @Published var afternoon = ""
-    @Published var now = ""
+    @Published var currentMood = ""
     
-    func reset() {
-        water = ""
-        food = ""
-        morning = ""
-        afternoon = ""
-        now = ""
-    }
 }

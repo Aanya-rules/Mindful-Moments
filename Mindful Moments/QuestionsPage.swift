@@ -16,7 +16,7 @@ struct QuestionsPage: View {
     @State private var newFood = ""
     @State private var newMorning = ""
     @State private var newAfternoon = ""
-    @State private var newNow = ""
+    @State private var newCurrentMood = ""
     
     @StateObject private var viewModel = AnswersViewModel()
     @State private var showConfirmation = false
@@ -45,7 +45,7 @@ struct QuestionsPage: View {
                         .font(.system(size: 20))
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
-                    TextField("Type answer here...", text: $viewModel.water)
+                    TextField("Type answer here...", text: $newWater)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -58,7 +58,7 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     
-                    TextField("Type answer here...", text: $viewModel.food)
+                    TextField("Type answer here...", text: $newFood)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -76,7 +76,7 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     
-                    TextField("Type here...", text: $viewModel.morning)
+                    TextField("Type here...", text: $newMorning)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -92,7 +92,7 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                 
-                    TextField("Type here...", text: $viewModel.afternoon)
+                    TextField("Type here...", text: $newAfternoon)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -108,7 +108,7 @@ struct QuestionsPage: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 0.035, green: 0.454, blue: 0.32))
                     
-                    TextField("Type here...", text: $viewModel.now )
+                    TextField("Type here...", text: $newCurrentMood)
                         .padding()
                         .border(Color.accentColor, width: 2)
                         .frame(width: 290.0, height: 40.0)
@@ -119,13 +119,27 @@ struct QuestionsPage: View {
 
                   
                     Button("Save") {
+                
+                        viewModel.water = newWater
+                        viewModel.food = newFood
+                        viewModel.morning = newMorning
+                        viewModel.afternoon = newAfternoon
+                        viewModel.currentMood = newCurrentMood
+                        
+                        
                         _ = Answers(Water: viewModel.water,
                                     Food: viewModel.food,
                                     Morning: viewModel.morning,
                                     Afternoon: viewModel.afternoon,
-                                    Now: viewModel.now)
-                        
-                        viewModel.reset()
+                                    currentMood: viewModel.currentMood)
+
+                        // Clear only the UI fields
+                        newWater = ""
+                        newFood = ""
+                        newMorning = ""
+                        newAfternoon = ""
+                        newCurrentMood = ""
+
                         showConfirmation = true
                     }
                     .tint(Color.green)
@@ -158,6 +172,15 @@ struct QuestionsPage: View {
                     .border(Color.gray, width: 2)
                     .cornerRadius(5)
                     .buttonStyle(.borderedProminent)
+                    
+                    HStack {
+                        Button("Pause") {
+                            AudioManager.shared.pauseMusic()
+                        }
+                        Button("Resume") {
+                            AudioManager.shared.resumeMusic()
+                        }
+                    }
                 }
             }
             .shadow(radius: 1)
@@ -215,7 +238,7 @@ struct QuestionsPage: View {
             average = nil
             if let num1 = Int(viewModel.morning),
                let num2 = Int(viewModel.afternoon),
-               let num3 = Int(viewModel.now),
+               let num3 = Int(viewModel.currentMood),
                (1...5).contains(num1),
                (1...5).contains(num2),
                (1...5).contains(num3) {
