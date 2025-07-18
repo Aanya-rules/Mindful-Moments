@@ -88,16 +88,16 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-        ZStack {
-             Image("background")
+            ZStack {
+                Image("background")
                     .resizable(resizingMode: .stretch)
                     .aspectRatio(contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
-            VStack {
-               Text("Mindful Moments")
-                     .font(.largeTitle)
-                     .fontWeight(.heavy)
-                     .foregroundColor(Color(hue: 0.504, saturation: 0.82, brightness: 0.604))
+                VStack {
+                    Text("Mindful Moments")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color(hue: 0.504, saturation: 0.82, brightness: 0.604))
                     
                     withAnimation {
                         Text(textTitle)
@@ -106,63 +106,85 @@ struct ContentView: View {
                             .bold()
                     }
                     .padding(.all)
-                                
-                TextField("Type your name here...", text: $name)
-                    .padding()
-                    .border(Color.gray, width: 4)
-                    .frame(width: 350.0, height: 70.0)
-                TextField("Type your password here...", text: $password)
-                    .padding()
-                    .border(Color.gray, width: 4)
-                    .frame(width: 350.0, height: 70.0)             
-                    .tint(.white)
-                
-            
-                
-                NavigationLink(destination: QuestionsPage()) {
-                    Text("Login")
-                        .foregroundColor(.white)
-                        .bold()
-                }
-
-                .border(Color(hue: 0.282, saturation: 0.822, brightness: 0.486), width: 4)
-                .cornerRadius(5)
-                
-                .padding()
-                Text("Forgot password?")
-                    .font(.subheadline)
-                    .foregroundColor(.green)
-                
-                HStack {
-                    Button("Pause") {
-                        AudioManager.shared.pauseMusic()
-                    }
-                    Button("Play") {
-                        AudioManager.shared.resumeMusic()
-                    // About Us button
-                    NavigationLink(destination: AboutUsPage()) {
-                        Text("About Us")
-                            .foregroundColor(.white)
-                            .bold()
-                            .frame(width: 200, height: 50) // consistent sizing
-                    }
-                    .background(Color(hue: 0.282, saturation: 0.822, brightness: 0.486))
-                    .cornerRadius(10)
-                    .padding(.bottom, 10)
-                    }
                     
-                    WebGIFView(gifName: "bearsleep")
-                        .frame(width: 200, height: 200)
+                    TextField("Type your name here...", text: $name)
+                        .padding()
+                        .border(Color.gray, width: 4)
+                        .frame(width: 350.0, height: 70.0)
+                    TextField("Type your password here...", text: $password)
+                        .padding()
+                        .border(Color.gray, width: 4)
+                        .frame(width: 350.0, height: 70.0)
+                        .tint(.white)
+                    
+                    
+                    
+                    NavigationLink(destination: QuestionsPage()) {
+                        Text("Login")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(.white)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 16)
+                            .background(Color.green)
+                            .cornerRadius(8)
+                            .shadow(radius: 2)
+                    }
+
+
+                    .border(Color(hue: 0.282, saturation: 0.822, brightness: 0.486), width: 4)
+                    .cornerRadius(5)
+                    
+                    .padding()
+                    Text("Forgot password?")
+                        .font(.subheadline)
+                        .foregroundColor(.green)
+                    
+                    
+                    VStack(spacing: 20) {
+                        // Buttons and NavigationLink
+                        HStack(spacing: 16) {
+                            Button("Pause") {
+                                AudioManager.shared.pauseMusic()
+                            }
+
+                            Button("Play") {
+                                AudioManager.shared.resumeMusic()
+                            }
+
+                            NavigationLink(destination: AboutUsPage()) {
+                                Text("About Us")
+                                    .foregroundColor(.white)
+                                    .bold()
+                                    .frame(width: 120, height: 44)
+                                    .background(Color(hue: 0.282, saturation: 0.822, brightness: 0.486))
+                                    .cornerRadius(8)
+                            }
+                        }
+                        .padding()
+                        .font(.title2)
+                        .buttonStyle(.borderedProminent)
+                        .tint(.green)
+                        .shadow(radius: 3)
+
+                        // Bear GIF BELOW the buttons
+                        WebGIFView(gifName: "bearsleep")
+                            .frame(width: 200, height: 200)
+                    }
+
+                      
+                    }
+                    .padding()
+                    .font(.title2)
+                    .buttonStyle(.borderedProminent)
+                    .tint(.green)
+                    .shadow(radius: 3)
                 }
-                .padding()
-                .font(.title2)
-                .buttonStyle(.borderedProminent)
-                .tint(.green)
-                .shadow(radius: 3)
+                
             }
         }
     }
-}
+
 
 #Preview {
     ContentView()
