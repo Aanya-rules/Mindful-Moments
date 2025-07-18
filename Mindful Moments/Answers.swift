@@ -24,3 +24,19 @@ class Answers {
         self.Now = Now
     }
 }
+
+class AnswersViewModel: ObservableObject {
+    @Published var water = ""
+    @Published var food = ""
+    @Published var morning = ""
+    @Published var afternoon = ""
+    @Published var now = ""
+    
+    func reset() {
+        water = ""
+        food = ""
+        morning = ""
+        afternoon = ""
+        now = ""
+    }
+}
