@@ -52,10 +52,21 @@ struct ClosingPage: View {
                 Text("So, let someone know you care about them too.")
                     .fontWeight(.regular)
                     .padding()
+                
+                Text("this is supposed to be at the end")
+                
+                NavigationLink(destination: ClosingPage()) {
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .bold()
                 }
-                    WebGIFView(gifName: "beardoctor")
-                        .frame(width: 200, height: 200)
-                    
+                
+                WebGIFView(gifName: "beardoctor")
+                    .frame(width: 200, height: 200)
+                
+                }
+            
+                  
                     
                 }
             }

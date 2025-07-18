@@ -149,7 +149,12 @@ struct QuestionsPage: View {
                         
                             .foregroundColor(.white)
                             .bold()
-                        
+                       
+                    NavigationLink(destination: ProxyView()) {
+                            Text("Take Action")
+                                .foregroundColor(.white)
+                                .bold()
+                        }
                         
                         
                         

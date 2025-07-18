@@ -124,12 +124,10 @@ struct ContentView: View {
                 
             
                 
-                NavigationLink(destination: ClosingPage()) {
+                NavigationLink(destination: QuestionsPage()) {
                     Text("Login")
                         .foregroundColor(.white)
                         .bold()
-                    
-                    
                 }
 
                 .border(Color(hue: 0.282, saturation: 0.822, brightness: 0.486), width: 4)
@@ -144,7 +142,7 @@ struct ContentView: View {
                     Button("Pause") {
                         AudioManager.shared.pauseMusic()
                     }
-                    Button("Resume") {
+                    Button("Play") {
                         AudioManager.shared.resumeMusic()
                     }
                 }
